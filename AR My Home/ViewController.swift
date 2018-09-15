@@ -30,6 +30,34 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene = scene
     }
     
+    func createMyHome() {
+        // Create a new scene
+        let scene = SCNScene(named: "art.scnassets/myHome.scn")!
+        sceneView.scene = scene
+    }
+    
+    func loadTreeByCode() {
+        // Create trunc for tree in code
+        let codeTrunc = SCNNode()
+        codeTrunc.name = "CodeTrunc"
+        codeTrunc.position = SCNVector3(0, 1.509, 0)
+        let trunc = SCNCylinder(radius: 0.1, height: 3)
+        trunc.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/trunc.jpeg")
+        codeTrunc.geometry = trunc
+        if let lawnNode = sceneView.scene.rootNode.childNode(withName: "Lawn", recursively: true) {
+            lawnNode.addChildNode(codeTrunc)
+        }
+        let codeCrown = SCNNode()
+        codeCrown.name = "CodeCrown"
+        codeCrown.position = SCNVector3(0, 1, 0)
+        let crown = SCNSphere(radius: 1.5)
+        trunc.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/crown02.jpeg")
+        codeCrown.geometry = crown
+        if let codeTruncNode = sceneView.scene.rootNode.childNode(withName: "CodeTrunc", recursively: true) {
+            codeTruncNode.addChildNode(codeCrown)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
