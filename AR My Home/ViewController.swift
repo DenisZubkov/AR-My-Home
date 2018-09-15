@@ -23,11 +23,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/myHome.scn")!
-        
-        // Set the scene to the view
-        sceneView.scene = scene
+        createMyHome()
+        loadTreeByCode()
     }
     
     func createMyHome() {
@@ -41,7 +38,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let codeTrunc = SCNNode()
         codeTrunc.name = "CodeTrunc"
         codeTrunc.position = SCNVector3(0, 1.509, 0)
-        let trunc = SCNCylinder(radius: 0.1, height: 3)
+        let trunc = SCNCylinder(radius: 0.1, height: 5)
         trunc.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/trunc.jpeg")
         codeTrunc.geometry = trunc
         if let lawnNode = sceneView.scene.rootNode.childNode(withName: "Lawn", recursively: true) {
@@ -49,9 +46,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
         let codeCrown = SCNNode()
         codeCrown.name = "CodeCrown"
-        codeCrown.position = SCNVector3(0, 1, 0)
-        let crown = SCNSphere(radius: 1.5)
-        trunc.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/crown02.jpeg")
+        codeCrown.position = SCNVector3(0, 3, 0)
+        let crown = SCNSphere(radius: 2)
+        crown.firstMaterial?.diffuse.contents = UIImage(named: "art.scnassets/crown02.jpg")
         codeCrown.geometry = crown
         if let codeTruncNode = sceneView.scene.rootNode.childNode(withName: "CodeTrunc", recursively: true) {
             codeTruncNode.addChildNode(codeCrown)
